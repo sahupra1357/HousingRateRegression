@@ -55,3 +55,13 @@ def process_house_attributes(df, train, test):
 
 	# return the concatenated training and testing data
 	return (trainX, testX)
+
+def load_house_images(df, inputPath):
+	# initialize our images array (i.e., the house images themselves)
+	images = []
+	# loop over the indexes of the houses
+	for i in df.index.values:
+		# find the four images for the house and sort the file paths,
+		# ensuring the four are always in the *same order*
+		basePath = os.path.sep.join([inputPath, "{}_*".format(i + 1)])
+		housePaths = sorted(list(glob.glob(basePath)))
